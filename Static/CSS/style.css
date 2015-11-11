@@ -27,13 +27,73 @@
   font-family: Georgia;
 }
 
-.flash {
+#header {
+  height: 75px;
+  color: #003AEC;
+  font-weight: bolder;
+  padding: 0px 10px;
+}
+
+#welcome {
+  display: inline-block;
+  width: 600px;
+  text-align: left;
+  font-size: 35px;
+}
+
+#body {
+  margin: 20px 60px;
+}
+
+#abs {
+  border-radius: 5px;
+  width: 120px;
+  height: 30px;
+  text-align: center;
   font-weight: bold;
+  font-size: 13px;
+  margin-left: 685px;
+  padding: 0px 0px;
+  color: white;
+}
+
+.header {
+  display: inline-block;
+  text-align: right;
+  margin-right: 45px;
+  font-size: 20px;
+  padding-left: 30px;
+}
+
+.post {
+  margin-left: 0px;
+  background-color: rgba(247, 247, 247, 0);
+  padding: 0px;
+}
+
+.post input {
+  background-color: blue;
+}
+
+.flash {
+  width: 250px;
+  font-weight: bold;
+  font-size: 20px;
   color: red;
+  text-align: center;
+  background-color: black;
+  margin: 0px auto;
+}
+
+.message {
+  display: inline-block;
+  width: 800px;
+  height: 150px;
+  border: 2px solid black;
 }
 
 form {
-  width: 530px;
+  width: 800px;
   margin: 0px auto;
   background: gray;
   padding: 25px;
@@ -42,6 +102,7 @@ form {
 label {
   display: block;
   text-align: right;
+  margin-right: 200px;
 }
 
 input {

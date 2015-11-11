@@ -13,14 +13,13 @@ app.secret_key = 'HeyKrisLeaveThemKidsAlone'
 def get_user(email):
   select = "SELECT * FROM users WHERE email = '{}'".format(email)
   user = mysql.fetch(select)
-  print '*************************MODEL FUNCTIONS*****************************'
-  print user
   return user
 
 @app.route('/')
 def index():
   if 'user_id' in session:
-    return "still need a minute!"
+    flash('Welcome, please watch for egg shells.')
+    return render_template('wall.html')
   else:
     return render_template('index.html')
 
@@ -69,19 +68,25 @@ def login():
 @app.route('/login', methods = ['POST'])
 def logcon():
   user = get_user(request.form['email'])
-  if len(user) == 0:
+  if not user:
     flash('Email not in database. Please register.')
     return render_template('index.html')
   else:
     if bcrypt.check_password_hash(user[0]['pw_digest'], request.form['password']):
       session['user_id']    = user[0]['id']
       session['first_name'] = user[0]['first_name']
-      flash('Welcome back!')
       return redirect('/')
     else:
       session.clear()
       flash('Email and/or Password not correct')
       return render_template('login.html')
+
+@app.route('/message', methods=['POST'])
+def post_message():
+  if len(request.form['message']) == 0:
+    flash("Ain't nothin' there yo!")
+    return  render_template('wall.html')
+  return 'testing check terminal'
 
 @app.route('/logout')
 def logout():

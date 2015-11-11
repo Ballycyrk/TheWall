@@ -8,7 +8,26 @@
   </head>
   <body>
     <div id="wall">
-      <h3>How can you have any meat if you don't eat your pudding?</h3>
+      <div id='header'>
+        <h3 id='welcome'>CodingDojo Wall</h3>
+        <h4 class='header'>Welcome {{ session['first_name'] }}</h4>
+        <p class='header'><a href='/logout'>log off</a></p>
+      </div>
+      <div id="body">
+        <h2>Scribble some Absolutes</h2>
+        <form  class='post' action='/message' method='post'>
+          <textarea class='message' name='message'></textarea>
+          <input type='hidden' name='prophet' value={{ session['user_id'] }}>
+          <input id='abs' type='submit' value='Share Epiphany'>
+        </form>
+        {% with messages = get_flashed_messages() %}
+          {% if messages %}
+            {% for message in messages %}
+            <p class='flash'>{{ message }}</p>
+            {% endfor %}
+          {% endif %}
+        {% endwith %}
+      </div>
     </div>
   </body>
 </html>
