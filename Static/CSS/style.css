@@ -92,6 +92,12 @@
   border: 2px solid black;
 }
 
+p.pDisplay {
+  padding-left: 22px;
+  padding-top: 0px;
+  margin-bottom: 10px;
+}
+
 form {
   width: 800px;
   margin: 0px auto;

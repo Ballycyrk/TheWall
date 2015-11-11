@@ -27,6 +27,14 @@
             {% endfor %}
           {% endif %}
         {% endwith %}
+        <div id="messages">
+          {% if posts %}
+            {% for post in posts %}
+             <h4 class="pDisplay">{{post['first_name']}} {{post['last_name']}} - {{post['created_at']}}</h4>
+             <p class="pDisplay">{{ post['message'] }}</p>
+            {% endfor %}
+          {% endif %}
+        </div>
       </div>
     </div>
   </body>
