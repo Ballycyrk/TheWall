@@ -62,5 +62,31 @@ def create():
       return 'Give us a minute.'
   return redirect('/')
 
+@app.route('/login')
+def login():
+  return render_template('login.html')
+
+@app.route('/login', methods = ['POST'])
+def logcon():
+  user = get_user(request.form['email'])
+  if len(user) == 0:
+    flash('Email not in database. Please register.')
+    return render_template('index.html')
+  else:
+    if bcrypt.check_password_hash(user[0]['pw_digest'], request.form['password']):
+      session['user_id']    = user[0]['id']
+      session['first_name'] = user[0]['first_name']
+      flash('Welcome back!')
+      return redirect('/')
+    else:
+      session.clear()
+      flash('Email and/or Password not correct')
+      return render_template('login.html')
+
+@app.route('/logout')
+def logout():
+  session.clear()
+  return redirect('/')
+
 app.run(debug=True)
 

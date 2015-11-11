@@ -27,6 +27,11 @@
   font-family: Georgia;
 }
 
+.flash {
+  font-weight: bold;
+  color: red;
+}
+
 form {
   width: 530px;
   margin: 0px auto;
