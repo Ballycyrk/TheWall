@@ -2,13 +2,44 @@
 <html lang='en'>
   <head>
     <meta charset='utf-8' />
-    <title>The Wall</title>
+    <title>Cladding</title>
     <meta name="description" content="Create a wall/forum page where users will be able the post a message and see the message displayed by others users. Stores the messages in a table called 'messages' and retrieve the messages from the database.">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='CSS/style.css') }}">
   </head>
   <body>
     <div id="container">
-      <h3>How can you have any meat if you don't eat your pudding?</h3>
+      <h1>Welcome to the Wall's registration!</h1>
+      <h2>It's not a soapbox. It's a wall.</h2>
+      <h4>(You'd be good to remember that.)</h4>
+      <br>
+      <h2>Want to join?  Fill in the following:</h2>
+      <form action='/register' method='post'>
+        <label>First Name:
+          <input type='text' name='first_name' placeholder='First Name'>
+        </label>
+        <label>Last Name:
+          <input type='text' name='last_name' placeholder='Last Name'>
+        </label>
+        <label>Email Address:
+          <input type='text' name='email' placeholder='Email Address'>
+        </label>
+        <label>Password:
+          <input type='password' name='password' placeholder='Enter Password'>
+        </label>
+        <label>Confirm Email:
+          <input type='password' name='confirm' placeholder='Just do it.'>
+        </label>
+        <input type='submit' value='Apply Cladding (join)'>
+      </form>
+      <br>
+      {% with messages = get_flashed_messages() %}
+        {% if messages %}
+          {% for message in messages %}
+          <p>{{ message }}</p>
+          {% endfor %}
+        {% endif %}
+      {% endwith %}
+      <h3>Already a member? <a href="/login">Log in here.</a> </h3>
     </div>
   </body>
 </html>
