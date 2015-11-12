@@ -43,6 +43,7 @@
 
 #body {
   margin: 20px 60px;
+  overflow-y: auto;
 }
 
 #abs {
@@ -55,6 +56,19 @@
   margin-left: 685px;
   padding: 0px 0px;
   color: white;
+}
+
+#crit {
+  border-radius: 5px;
+  width: 120px;
+  height: 30px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 13px;
+  margin-left: 685px;
+  padding: 0px 0px;
+  color: rgb( 255, 179, 55 );
+  background-color: green;
 }
 
 .header {
@@ -92,10 +106,31 @@
   border: 2px solid black;
 }
 
-p.pDisplay {
+.comment {
+  display: inline-block;
+  margin-left: 400px;
+  width: 400px;
+  height: 75px;
+  border: 1px solid black;
+}
+
+.cpost {
+  text-align: right;
+  margin-right: 50px;
+}
+
+p.pDisplay, p.cDisplay {
   padding-left: 22px;
   padding-top: 0px;
   margin-bottom: 10px;
+}
+
+.cDisplay {
+  color: blue;
+  margin-left: 65px;
+  background-color: rgba(240, 255, 255, 0.73);
+  margin-right: 380px;
+  height: inherit;
 }
 
 form {
@@ -132,5 +167,10 @@ th {
 
 h3 {
   margin-top: 20px;
+}
+
+textarea {
+  background-color: rgba(240, 248, 255, 0.75);
+  font-size: 20px;
 }
 

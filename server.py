@@ -15,19 +15,22 @@ def get_user(email):
   user = mysql.fetch(select)
   return user
 
-def get_messages():
-  posts = mysql.fetch("SELECT id, first_name, last_name, messages.int, \
-                      messages.message, DATE_FORMAT(messages.created_at,'%b %D %Y') as created_at \
-                              FROM users JOIN messages ON id = users_id \
-                              ORDER BY messages.created_at DESC")
-  return posts
-
 @app.route('/')
 def index():
   if 'user_id' in session:
-    posts = get_messages()
+    posts = mysql.fetch("SELECT id, first_name, last_name, messages.int, \
+                      messages.message, DATE_FORMAT(messages.created_at,'%b %D %Y') as created_at \
+                        FROM users JOIN messages ON id = users_id \
+                        ORDER BY messages.created_at DESC")
+
+    comments = mysql.fetch("SELECT comments.id, comments.comment, first_name,\
+                          last_name, comments.messages_int, DATE_FORMAT(comments.created_at,'%b %D %Y') as created_at \
+                            FROM users \
+                            JOIN comments ON users.id = users_id")
+    print '********************'
+    print comments
     if posts:
-      return render_template('wall.html', posts = posts)
+      return render_template('wall.html', posts = posts, comments = comments)
     else:
       return render_template('wall.html')
   else:
@@ -94,11 +97,23 @@ def logcon():
 def post_message():
   if len(request.form['message']) == 0:
     flash("Ain't nothin' there yo!")
-    return  render_template('wall.html')
+    return  redirect('/')
   message = str(request.form['message']).replace("'", "\\'")
   insert = "INSERT INTO messages \
             (users_id, message, created_at, updated_at) \
             VALUES ('{}','{}', NOW(), NOW())".format(request.form['prophet'],message)
+  mysql.run_mysql_query(insert)
+  return redirect('/')
+
+@app.route('/comment', methods=['POST'])
+def post_comment():
+  if len(request.form['comment']) == 0:
+    flash("Gonna have to type it out kid.")
+    return  redirect('/')
+  comment = str(request.form['comment']).replace("'", "\\'")
+  insert = "INSERT INTO comments \
+            (messages_int, comment, users_id, created_at, updated_at) \
+            VALUES ('{}','{}','{}', NOW(), NOW())".format(request.form['heritic'], comment, session['user_id'])
   mysql.run_mysql_query(insert)
   return redirect('/')
 

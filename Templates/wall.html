@@ -30,8 +30,22 @@
         <div id="messages">
           {% if posts %}
             {% for post in posts %}
-             <h4 class="pDisplay">{{post['first_name']}} {{post['last_name']}} - {{post['created_at']}}</h4>
+             <h3 class="pDisplay">{{post['first_name']}} {{post['last_name']}} - {{post['created_at']}}</h3>
              <p class="pDisplay">{{ post['message'] }}</p>
+              {% if comments %}
+                {% for comment in comments %}
+                  {% if comment['messages_int'] == post['int'] %}
+                    <h3 class="cDisplay">{{comment['first_name']}} {{comment['last_name']}} - {{comment['created_at']}}</h4>
+                    <p class="cDisplay">{{ comment['comment'] }}</p>
+                  {% endif %}
+                {% endfor %}
+              {% endif %}
+             <h4 class="cpost"> Raise doubts </h4>
+              <form  class='post' action='/comment' method='post'>
+                <textarea class='comment' name='comment'></textarea>
+                <input type='hidden' name='heritic' value={{ post['int'] }}>
+                <input id='crit' type='submit' value='Question Values'>
+              </form>
             {% endfor %}
           {% endif %}
         </div>
